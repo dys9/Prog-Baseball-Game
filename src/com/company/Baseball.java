@@ -18,20 +18,20 @@ public class Baseball {
     private final static int NUM_MAX = 9;
     private final static int NUM_MIN = 1;
 
-    private final Scanner Sc;
+    private final Scanner myScanner;
     private final int [] Answer;    // 랜덤으로 생성된 정답
     private int [] Input;           // 사용자 입력
 
     /* Constructor */
-    public Baseball(Scanner scanner){
+    public Baseball(Scanner myScanner){
         this.Answer = getRandNum();
-        this.Sc = scanner;
+        this.myScanner = myScanner;
     }
 
     public void setInput(){
         while (true){
             System.out.print(INPUT_MESSAGE);
-            String strInput = Sc.next();
+            String strInput = myScanner.next();
             if (strInput.length() == INPUT_SIZE) {
                 this.Input = Stream.of(strInput.split("")).mapToInt(Integer::parseInt).toArray();
                 break;
@@ -60,19 +60,20 @@ public class Baseball {
     }
 
     private int[] getRandNum(){
-        int cnt = 0;
+        int count = 0;
         int [] numbers = new int[INPUT_SIZE];
 
         Random random = new Random();
         random.setSeed(System.currentTimeMillis());
-        boolean[] flag = new boolean[NUM_MAX]; // False Array
+        boolean[] isGenerated = new boolean[NUM_MAX];
 
-        while (cnt < INPUT_SIZE) {
-            int idx = random.nextInt(NUM_MAX - 1) + NUM_MIN; // Range 1 ~ 9
-            if (!flag[idx]) { // isFalse?
-                numbers[cnt] = idx;
-                flag[numbers[cnt]] = true;
-                cnt++;
+        while (count < INPUT_SIZE) {
+            int index = random.nextInt(NUM_MAX - 1) + NUM_MIN; // Range 1 ~ 9
+            if (!isGenerated[index]) { // isFalse?
+                numbers[count] = index;
+                isGenerated[index] = true;
+
+                count++;
             }
         }
         return numbers;

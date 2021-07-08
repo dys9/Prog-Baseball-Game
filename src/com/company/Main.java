@@ -17,9 +17,9 @@ public class Main {
         }while (isReStart(sc));
     }
 
-    private static boolean isReStart(Scanner sc){
+    private static boolean isReStart(Scanner myScanner){
         while (true) {
-            int input= sc.nextInt();
+            int input = myScanner.nextInt();
             if (input == RESTART_CODE) {
                 return true;
             } else if (input == EXIT_CODE) {
